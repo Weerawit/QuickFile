@@ -13,7 +13,8 @@ var foundSetting: Bool = false
 if (Process.arguments.count > 1) {
     for arg in Process.arguments {
         switch arg {
-        case "-setting":
+            //open -a QuickFile --args setting
+        case "setting":
             foundSetting = true
             NSApplicationMain(C_ARGC,  C_ARGV)
             break
