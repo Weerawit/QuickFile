@@ -8,7 +8,7 @@
 
 import Cocoa
 
-@NSApplicationMain
+//@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
 
@@ -21,6 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-
+    func applicationShouldTerminateAfterLastWindowClosed(theApplication: NSApplication) -> Bool {
+        return true
+    }
 }
 
