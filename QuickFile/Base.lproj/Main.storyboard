@@ -747,17 +747,6 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="gnZ-XO-XHF">
-                                            <rect key="frame" x="127" y="141" width="62" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="14" id="Cr0-Ft-ivi"/>
-                                                <constraint firstAttribute="width" constant="57" id="ZCB-6w-dxm"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="check" title="Yes" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="f4y-Pp-FQw">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="smallSystem"/>
-                                            </buttonCell>
-                                        </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="slF-Xs-bLh">
                                             <rect key="frame" x="128" y="119" width="62" height="20"/>
                                             <constraints>
@@ -767,6 +756,9 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="smallSystem"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="openInEditorPress:" target="XfG-lQ-9wD" id="QtN-CV-7lj"/>
+                                            </connections>
                                         </button>
                                         <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTl-zJ-JCz">
                                             <rect key="frame" x="128" y="58" width="114" height="58"/>
@@ -774,7 +766,7 @@
                                                 <constraint firstAttribute="width" constant="114" id="yZ6-J0-Syr"/>
                                             </constraints>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="cellSize" width="114" height="18"/>
+                                            <size key="cellSize" width="91" height="18"/>
                                             <size key="intercellSpacing" width="4" height="2"/>
                                             <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" inset="2" id="TC1-x1-ZZZ">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -796,7 +788,24 @@
                                                     </buttonCell>
                                                 </column>
                                             </cells>
+                                            <connections>
+                                                <action selector="editorPress:" target="XfG-lQ-9wD" id="gwI-ub-eA7"/>
+                                            </connections>
                                         </matrix>
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="gnZ-XO-XHF">
+                                            <rect key="frame" x="127" y="141" width="62" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="14" id="Cr0-Ft-ivi"/>
+                                                <constraint firstAttribute="width" constant="57" id="ZCB-6w-dxm"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="check" title="Yes" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="f4y-Pp-FQw">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="smallSystem"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="appendSequencePress:" target="XfG-lQ-9wD" id="Aal-t7-xHC"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <constraints>

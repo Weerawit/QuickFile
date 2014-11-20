@@ -7,12 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B82170601A1E3FE700DD4278 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821705F1A1E3FE700DD4278 /* main.swift */; };
+		B82170651A1E41B300DD4278 /* FinderPath.m in Sources */ = {isa = PBXBuildFile; fileRef = B82170631A1E41B300DD4278 /* FinderPath.m */; };
+		B82170671A1E41D600DD4278 /* Finder.app in Resources */ = {isa = PBXBuildFile; fileRef = B82170661A1E41D600DD4278 /* Finder.app */; };
+		B82170681A1E421500DD4278 /* Finder.app in Sources */ = {isa = PBXBuildFile; fileRef = B82170661A1E41D600DD4278 /* Finder.app */; };
 		B897B6EF1A1E15220029A370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B897B6EE1A1E15220029A370 /* AppDelegate.swift */; };
 		B897B6F11A1E15220029A370 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B897B6F01A1E15220029A370 /* ViewController.swift */; };
 		B897B6F31A1E15220029A370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B897B6F21A1E15220029A370 /* Images.xcassets */; };
 		B897B6F61A1E15220029A370 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B897B6F41A1E15220029A370 /* Main.storyboard */; };
 		B897B7021A1E15220029A370 /* QuickFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B897B7011A1E15220029A370 /* QuickFileTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		B82170611A1E418200DD4278 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.app";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_BASE).h",
+			);
+			script = "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		B897B6FC1A1E15220029A370 /* PBXContainerItemProxy */ = {
@@ -25,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B821705F1A1E3FE700DD4278 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B82170621A1E41B200DD4278 /* QuickFile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickFile-Bridging-Header.h"; sourceTree = "<group>"; };
+		B82170631A1E41B300DD4278 /* FinderPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinderPath.m; sourceTree = "<group>"; };
+		B82170641A1E41B300DD4278 /* FinderPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinderPath.h; sourceTree = "<group>"; };
+		B82170661A1E41D600DD4278 /* Finder.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Finder.app; path = /System/Library/CoreServices/Finder.app; sourceTree = "<absolute>"; };
 		B897B6E91A1E15220029A370 /* QuickFile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickFile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B897B6ED1A1E15220029A370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B897B6EE1A1E15220029A370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +80,7 @@
 		B897B6E01A1E15220029A370 = {
 			isa = PBXGroup;
 			children = (
+				B82170661A1E41D600DD4278 /* Finder.app */,
 				B897B6EB1A1E15220029A370 /* QuickFile */,
 				B897B6FE1A1E15220029A370 /* QuickFileTests */,
 				B897B6EA1A1E15220029A370 /* Products */,
@@ -75,11 +99,15 @@
 		B897B6EB1A1E15220029A370 /* QuickFile */ = {
 			isa = PBXGroup;
 			children = (
+				B82170631A1E41B300DD4278 /* FinderPath.m */,
+				B82170641A1E41B300DD4278 /* FinderPath.h */,
 				B897B6EE1A1E15220029A370 /* AppDelegate.swift */,
 				B897B6F01A1E15220029A370 /* ViewController.swift */,
 				B897B6F21A1E15220029A370 /* Images.xcassets */,
 				B897B6F41A1E15220029A370 /* Main.storyboard */,
 				B897B6EC1A1E15220029A370 /* Supporting Files */,
+				B821705F1A1E3FE700DD4278 /* main.swift */,
+				B82170621A1E41B200DD4278 /* QuickFile-Bridging-Header.h */,
 			);
 			path = QuickFile;
 			sourceTree = "<group>";
@@ -121,6 +149,7 @@
 				B897B6E71A1E15220029A370 /* Resources */,
 			);
 			buildRules = (
+				B82170611A1E418200DD4278 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -189,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82170671A1E41D600DD4278 /* Finder.app in Resources */,
 				B897B6F31A1E15220029A370 /* Images.xcassets in Resources */,
 				B897B6F61A1E15220029A370 /* Main.storyboard in Resources */,
 			);
@@ -208,8 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82170681A1E421500DD4278 /* Finder.app in Sources */,
+				B82170651A1E41B300DD4278 /* FinderPath.m in Sources */,
 				B897B6F11A1E15220029A370 /* ViewController.swift in Sources */,
 				B897B6EF1A1E15220029A370 /* AppDelegate.swift in Sources */,
+				B82170601A1E3FE700DD4278 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,10 +357,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QuickFile/QuickFile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -335,10 +371,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QuickFile/QuickFile-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -397,6 +435,7 @@
 				B897B7071A1E15220029A370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B897B7081A1E15220029A370 /* Build configuration list for PBXNativeTarget "QuickFileTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +444,7 @@
 				B897B70A1A1E15220029A370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
