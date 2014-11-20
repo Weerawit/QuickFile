@@ -8,10 +8,8 @@
 
 import Cocoa
 
-//@NSApplicationMain
+//@NSApplicationMain --remove due to custom main.swift
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
@@ -22,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(theApplication: NSApplication) -> Bool {
+        //terminate process after close setting window
         return true
     }
 }
