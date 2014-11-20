@@ -15,6 +15,40 @@
 
 
 - (NSString*) getCurrentPath {
+    
+    FinderApplication* finder = [SBApplication applicationWithBundleIdentifier:@"com.apple.Finder"];
+    
+    FinderItem *target = [(NSArray*)[[finder selection]get] firstObject];
+    if (target == nil){
+        target = [[[[finder FinderWindows] firstObject] target] get];
+    }
+    
+    NSURL* url =[NSURL URLWithString:target.URL];
+    NSError* error;
+    NSData* bookmark = [NSURL bookmarkDataWithContentsOfURL:url error:nil];
+    NSURL* fullUrl = [NSURL URLByResolvingBookmarkData:bookmark
+                                               options:NSURLBookmarkResolutionWithoutUI
+                                         relativeToURL:nil
+                                   bookmarkDataIsStale:nil
+                                                 error:&error];
+    if(fullUrl != nil){
+        url = fullUrl;
+    }
+    
+    
+    NSString* path = [[url path] stringByExpandingTildeInPath];
+    
+    BOOL isDir = NO;
+    [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
+    
+    if(!isDir){
+        path = [path stringByDeletingLastPathComponent];
+    }
+    
+    return path;
+
+    
+    /**
     FinderApplication *finder = [SBApplication applicationWithBundleIdentifier:@"com.apple.Finder"];
     
     SBElementArray *windowArrays = [finder windows];
@@ -23,6 +57,7 @@
     NSString *key = @"target";
     FinderApplicationFile *target = [properties objectForKey:key];
     return [target URL];
+     */
 }
 
 

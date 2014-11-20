@@ -16,12 +16,6 @@ class ViewController: NSViewController {
     @IBOutlet weak var openInEditorChk: NSButton!
     @IBOutlet weak var editorRadio: NSMatrix!
     
-    let FILENAME: String = "Untitle"
-    let FILE_EXTENSION: String = "txt"
-    let APPEND_SEQUENCE: String = "true"
-    let OPEN_IN_EDITOR: String = "true"
-    let EDITOR: String = "textedit"
-    
     let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
@@ -43,15 +37,15 @@ class ViewController: NSViewController {
         if let filename: String = userDefault.valueForKey("filename") as? String {
             fileNameTxt.stringValue = filename
         } else {
-            userDefault.setValue(FILENAME, forKey: "filename")
-            fileNameTxt.stringValue = FILENAME
+            userDefault.setValue(Constants.FILENAME, forKey: "filename")
+            fileNameTxt.stringValue = Constants.FILENAME
         }
         
         if let filenameExtension: String = userDefault.valueForKey("filenameExtension") as? String {
             fileExtensionTxt.stringValue = filenameExtension
         } else {
-            userDefault.setValue(FILE_EXTENSION, forKey: "filenameExtension")
-            fileExtensionTxt.stringValue = FILE_EXTENSION
+            userDefault.setValue(Constants.FILE_EXTENSION, forKey: "filenameExtension")
+            fileExtensionTxt.stringValue = Constants.FILE_EXTENSION
         }
         
         if let appendSequence: String = userDefault.valueForKey("appendSequence") as? String {
@@ -61,7 +55,7 @@ class ViewController: NSViewController {
                 appendSeqChk.state = NSOffState
             }
         } else {
-            userDefault.setValue(APPEND_SEQUENCE, forKey: "appendSequence")
+            userDefault.setValue(Constants.APPEND_SEQUENCE, forKey: "appendSequence")
             appendSeqChk.state = NSOnState
         }
         
@@ -72,7 +66,7 @@ class ViewController: NSViewController {
                 openInEditorChk.state = NSOffState
             }
         } else {
-            userDefault.setValue(OPEN_IN_EDITOR, forKey: "openInEditor")
+            userDefault.setValue(Constants.OPEN_IN_EDITOR, forKey: "openInEditor")
             openInEditorChk.state = NSOnState
         }
         
@@ -86,6 +80,7 @@ class ViewController: NSViewController {
                 editorRadio.selectCellAtRow(0, column: 0)
             }
         } else {
+            userDefault.setValue(Constants.EDITOR, forKey: "editor")
             editorRadio.selectCellAtRow(0, column: 0)
         }
 
@@ -129,18 +124,14 @@ class ViewController: NSViewController {
     }
     @IBAction func restoreDefault(sender: AnyObject) {
         println("default press")
-        userDefault.setValue(FILENAME, forKey: "filename")
-        userDefault.setValue(FILE_EXTENSION, forKey: "filenameExtension")
-        userDefault.setValue(APPEND_SEQUENCE, forKey: "appendSequence")
-        userDefault.setValue(OPEN_IN_EDITOR, forKey: "openInEditor")
-        userDefault.setValue(EDITOR, forKey: "editor")
+        userDefault.setValue(Constants.FILENAME, forKey: "filename")
+        userDefault.setValue(Constants.FILE_EXTENSION, forKey: "filenameExtension")
+        userDefault.setValue(Constants.APPEND_SEQUENCE, forKey: "appendSequence")
+        userDefault.setValue(Constants.OPEN_IN_EDITOR, forKey: "openInEditor")
+        userDefault.setValue(Constants.EDITOR, forKey: "editor")
         displayValueFromUserDefault()
-        
+ 
     }
     
-    func printUserDefault() {
-        let f = userDefault.valueForKey("editor")
-        println("userDefault : \(f)")
-    }
 }
 
