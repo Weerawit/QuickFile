@@ -7,6 +7,22 @@
 //
 import Cocoa
 import Foundation
+import AppKit
+
+class TextFieldDelegate : NSObject, NSTextFieldDelegate {
+    override func controlTextDidEndEditing(obj: NSNotification) {
+
+        let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        if let textField: NSTextField = obj.object as? NSTextField {
+            println("text change \(textField.identifier)")
+            if textField.identifier == "filename" {
+                userDefault.setValue(textField.stringValue, forKey: "filename")
+            } else if textField.identifier == "fileExtension" {
+                userDefault.setValue(textField.stringValue, forKey: "filenameExtension")
+            }
+        }
+    }
+}
 
 class ViewController: NSViewController {
 
@@ -23,8 +39,6 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
         displayValueFromUserDefault()
-        
-
     }
 
     override var representedObject: AnyObject? {
@@ -86,14 +100,6 @@ class ViewController: NSViewController {
 
     }
 
-    @IBAction func extensionChange(sender: NSTextField) {
-        println("extensionChange")
-        userDefault.setValue(fileExtensionTxt.stringValue, forKey: "filenameExtension")
-    }
-    @IBAction func filenameChange(sender: NSTextField) {
-        println("filenameChange")
-        userDefault.setValue(fileNameTxt.stringValue, forKey: "filename")
-    }
 
     @IBAction func editorPress(sender: NSMatrix) {
         println("editorPress")
