@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B82170601A1E3FE700DD4278 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821705F1A1E3FE700DD4278 /* main.swift */; };
 		B82170651A1E41B300DD4278 /* FinderPath.m in Sources */ = {isa = PBXBuildFile; fileRef = B82170631A1E41B300DD4278 /* FinderPath.m */; };
 		B82170671A1E41D600DD4278 /* Finder.app in Resources */ = {isa = PBXBuildFile; fileRef = B82170661A1E41D600DD4278 /* Finder.app */; };
 		B82170681A1E421500DD4278 /* Finder.app in Sources */ = {isa = PBXBuildFile; fileRef = B82170661A1E41D600DD4278 /* Finder.app */; };
@@ -45,7 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B821705F1A1E3FE700DD4278 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B80699731A1F3C8E00452232 /* QuickFile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = QuickFile.entitlements; sourceTree = "<group>"; };
 		B82170621A1E41B200DD4278 /* QuickFile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickFile-Bridging-Header.h"; sourceTree = "<group>"; };
 		B82170631A1E41B300DD4278 /* FinderPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinderPath.m; sourceTree = "<group>"; };
 		B82170641A1E41B300DD4278 /* FinderPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinderPath.h; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		B897B6EB1A1E15220029A370 /* QuickFile */ = {
 			isa = PBXGroup;
 			children = (
+				B80699731A1F3C8E00452232 /* QuickFile.entitlements */,
 				B82170631A1E41B300DD4278 /* FinderPath.m */,
 				B82170641A1E41B300DD4278 /* FinderPath.h */,
 				B897B6EE1A1E15220029A370 /* AppDelegate.swift */,
@@ -111,7 +111,6 @@
 				B897B6F21A1E15220029A370 /* Images.xcassets */,
 				B897B6F41A1E15220029A370 /* Main.storyboard */,
 				B897B6EC1A1E15220029A370 /* Supporting Files */,
-				B821705F1A1E3FE700DD4278 /* main.swift */,
 				B82170621A1E41B200DD4278 /* QuickFile-Bridging-Header.h */,
 				B821706C1A1E4F6F00DD4278 /* Constants.swift */,
 			);
@@ -193,6 +192,11 @@
 				TargetAttributes = {
 					B897B6E81A1E15220029A370 = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					B897B6FA1A1E15220029A370 = {
 						CreatedOnToolsVersion = 6.1;
@@ -249,7 +253,6 @@
 				B82170651A1E41B300DD4278 /* FinderPath.m in Sources */,
 				B897B6F11A1E15220029A370 /* ViewController.swift in Sources */,
 				B897B6EF1A1E15220029A370 /* AppDelegate.swift in Sources */,
-				B82170601A1E3FE700DD4278 /* main.swift in Sources */,
 				B821706D1A1E4F6F00DD4278 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +369,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = QuickFile/QuickFile.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -380,6 +384,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = QuickFile/QuickFile.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
