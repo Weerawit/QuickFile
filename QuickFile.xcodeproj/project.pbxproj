@@ -44,7 +44,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B80699731A1F3C8E00452232 /* QuickFile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = QuickFile.entitlements; sourceTree = "<group>"; };
 		B82170621A1E41B200DD4278 /* QuickFile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickFile-Bridging-Header.h"; sourceTree = "<group>"; };
 		B82170631A1E41B300DD4278 /* FinderPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinderPath.m; sourceTree = "<group>"; };
 		B82170641A1E41B300DD4278 /* FinderPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinderPath.h; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 		B897B6EB1A1E15220029A370 /* QuickFile */ = {
 			isa = PBXGroup;
 			children = (
-				B80699731A1F3C8E00452232 /* QuickFile.entitlements */,
 				B82170631A1E41B300DD4278 /* FinderPath.m */,
 				B82170641A1E41B300DD4278 /* FinderPath.h */,
 				B897B6EE1A1E15220029A370 /* AppDelegate.swift */,
@@ -194,7 +192,7 @@
 						CreatedOnToolsVersion = 6.1;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
