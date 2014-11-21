@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
-	<string>QuickFile</string>
+	<string>QuickFile.icns</string>
 	<key>CFBundleDisplayName</key>
 	<string>Quick File</string>
 	<key>CFBundleIdentifier</key>
