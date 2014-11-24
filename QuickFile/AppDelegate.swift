@@ -14,8 +14,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
-       
+        
         var foundSetting: Bool = false
+        /*
         if (Process.arguments.count > 1) {
             for (index, arg) in enumerate(Process.arguments) {
                 if arg == "setting" {
@@ -23,6 +24,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     break
                 }
             }
+        }
+*/
+        
+        if NSEvent.modifierFlags() == NSEventModifierFlags.AlternateKeyMask {
+            foundSetting = true
         }
         
         //
