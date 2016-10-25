@@ -11,62 +11,66 @@ import AppKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
-        
-        var foundSetting: Bool = false
-        /*
-        if (Process.arguments.count > 1) {
-            for (index, arg) in enumerate(Process.arguments) {
-                if arg == "setting" {
-                    foundSetting = true
-                    break
-                }
-            }
-        }
-*/
-        
-        if NSEvent.modifierFlags() == NSEventModifierFlags.AlternateKeyMask {
+    
+    var window: NSWindow!
+    
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        print("applicationWillFinishLaunching")
+        var foundSetting: Bool = true
+        if NSEvent.modifierFlags() == NSEventModifierFlags.option {
             foundSetting = true
         }
         
-        //
         if !foundSetting {
-            if !handleLocalNotification(aNotification) {
-                handleCommandLine()
+            handleCommandLine()
+            
+            NSApplication.shared().terminate(self)
+        } else {
+            
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            let windowController = storyboard.instantiateController(withIdentifier: "WindowController") as! NSWindowController
+            
+            if let window = windowController.window {
+                self.window = window
             }
-
-            NSApplication.sharedApplication().terminate(self)
+            
         }
+        
+    }
+    
+
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        print("applicationDidFinish")
+        self.window.makeKeyAndOrderFront(self.window)
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
-    func applicationShouldTerminateAfterLastWindowClosed(theApplication: NSApplication) -> Bool {
+    func applicationShouldTerminateAfterLastWindowClosed(_ theApplication: NSApplication) -> Bool {
         //terminate process after close setting window
         return true
     }
     
-    func handleLocalNotification(aNotification: NSNotification) -> Bool {
-        if let userInfo: Dictionary = aNotification.userInfo {
+    func handleLocalNotification(_ aNotification: Notification) -> Bool {
+        if let userInfo: Dictionary = (aNotification as NSNotification).userInfo {
             if let value: NSUserNotification = userInfo[NSApplicationLaunchUserNotificationKey] as? NSUserNotification {
                 
                 var log = "handleLocalNotification"
 
                 let newFilename = value.identifier!
-                let userDefault = NSUserDefaults.standardUserDefaults()
+                let userDefault = UserDefaults.standard
                 var defaultEditor = Constants.EDITOR
-                if let editor: String = userDefault.valueForKey("editor") as? String {
+                if let editor: String = userDefault.value(forKey: "editor") as? String {
                     defaultEditor = editor
                 }
                 
                 log += " newFilename : \(newFilename), defaultEditor: \(defaultEditor) \n"
                 
-                let workspace = NSWorkspace.sharedWorkspace()
-                switch defaultEditor.lowercaseString {
+                let workspace = NSWorkspace.shared()
+                switch defaultEditor.lowercased() {
                 case "textedit":
                     workspace.openFile(newFilename, withApplication: "TextEdit")
                 case "textwrangler":
@@ -74,14 +78,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         workspace.openFile(newFilename, withApplication: "TextEdit")
                     }
                 case "textmate":
-                    if !NSWorkspace.sharedWorkspace().openFile(newFilename, withApplication: "TextMate") {
+                    if !NSWorkspace.shared().openFile(newFilename, withApplication: "TextMate") {
                         workspace.openFile(newFilename, withApplication: "TextEdit")
                     }
                 default:
-                    NSWorkspace.sharedWorkspace().openFile(newFilename, withApplication: "TextEdit")
+                    NSWorkspace.shared().openFile(newFilename, withApplication: "TextEdit")
                 }
                 
-                log.writeToFile("/tmp/quick.log", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+                //log.writeToFile("/tmp/quick.log", atomically: true, encoding: String.Encoding.utf8)
                 return true
             }
         }
@@ -90,26 +94,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func handleCommandLine() {
         //--start load default---
-        let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefault: UserDefaults = UserDefaults.standard
         var defaultFilename = Constants.FILENAME
         var defaultExtension = Constants.FILE_EXTENSION
         var defaultAppendSequence = Constants.APPEND_SEQUENCE
         var defaultOpenInEditor = Constants.OPEN_IN_EDITOR
         var defaultEditor = Constants.EDITOR
         
-        if let filename: String = userDefault.valueForKey("filename") as? String {
+        if let filename: String = userDefault.value(forKey: "filename") as? String {
             defaultFilename = filename
         }
-        if let filenameExtension: String = userDefault.valueForKey("filenameExtension") as? String {
+        if let filenameExtension: String = userDefault.value(forKey: "filenameExtension") as? String {
             defaultExtension = filenameExtension
         }
-        if let appendSequence: String = userDefault.valueForKey("appendSequence") as? String {
+        if let appendSequence: String = userDefault.value(forKey: "appendSequence") as? String {
             defaultAppendSequence = appendSequence
         }
-        if let openInEditor: String = userDefault.valueForKey("openInEditor") as? String {
+        if let openInEditor: String = userDefault.value(forKey: "openInEditor") as? String {
             defaultOpenInEditor = openInEditor
         }
-        if let editor: String = userDefault.valueForKey("editor") as? String {
+        if let editor: String = userDefault.value(forKey: "editor") as? String {
             defaultEditor = editor
         }
         //--end load default ---
@@ -123,28 +127,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 newFilename = newFilename + "." + defaultExtension
             }
             var isCreatedFile = false
-            let fileManager = NSFileManager.defaultManager()
-            if fileManager.isWritableFileAtPath(currentPath) {
-                if defaultAppendSequence.lowercaseString == "true" {
-                    var i = 1;
-                    while fileManager.fileExistsAtPath(newFilename) {
-                        newFilename = currentPath + "/" + defaultFilename + "_\(i++)"
+            let fileManager = FileManager.default
+            if fileManager.isWritableFile(atPath: currentPath) {
+                if defaultAppendSequence.lowercased() == "true" {
+                    let i = 1;
+                    while fileManager.fileExists(atPath: newFilename) {
+                        newFilename = currentPath + "/" + defaultFilename + "_\(i+1)"
                         if !defaultExtension.isEmpty {
                             newFilename = newFilename + "." + defaultExtension
                         }
                     }
                 }
-                if !fileManager.fileExistsAtPath(newFilename) {
-                    println("writing newFilename : \(newFilename)")
-                    isCreatedFile = fileManager.createFileAtPath(newFilename, contents: nil, attributes: nil)
+                if !fileManager.fileExists(atPath: newFilename) {
+                    print("writing newFilename : \(newFilename)")
+                    isCreatedFile = fileManager.createFile(atPath: newFilename, contents: nil, attributes: nil)
                 } else {
-                    println("filename is exist \(newFilename), not create a file")
+                    print("filename is exist \(newFilename), not create a file")
                 }
             }
             
             //send notification
             if isCreatedFile {
-                let userNotificationCenter = NSUserNotificationCenter.defaultUserNotificationCenter()
+                let userNotificationCenter = NSUserNotificationCenter.default
                 
                 //alert in User Notification
                 let notification:NSUserNotification = NSUserNotification()
@@ -154,14 +158,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 notification.hasActionButton = false
                 //            notification.contentImage = NSBundle.mainBundle().resourceURL
                 
-                userNotificationCenter.deliverNotification(notification)
+                userNotificationCenter.deliver(notification)
                 
             }
             
             //--open editor--
-            if defaultOpenInEditor.lowercaseString == "true" {
-                let workspace = NSWorkspace.sharedWorkspace()
-                switch defaultEditor.lowercaseString {
+            if defaultOpenInEditor.lowercased() == "true" {
+                let workspace = NSWorkspace.shared()
+                switch defaultEditor.lowercased() {
                 case "textedit":
                     workspace.openFile(newFilename, withApplication: "TextEdit")
                 case "textwrangler":
@@ -169,16 +173,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         workspace.openFile(newFilename, withApplication: "TextEdit")
                     }
                 case "textmate":
-                    if !NSWorkspace.sharedWorkspace().openFile(newFilename, withApplication: "TextMate") {
+                    if !NSWorkspace.shared().openFile(newFilename, withApplication: "TextMate") {
                         workspace.openFile(newFilename, withApplication: "TextEdit")
                     }
                 default:
-                    NSWorkspace.sharedWorkspace().openFile(newFilename, withApplication: "TextEdit")
+                    NSWorkspace.shared().openFile(newFilename, withApplication: "TextEdit")
                 }
                 
             }
         } else {
-            println("this path is not support")
+            print("this path is not support")
         }
     }
 }

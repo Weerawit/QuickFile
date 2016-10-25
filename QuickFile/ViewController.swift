@@ -10,11 +10,11 @@ import Foundation
 import AppKit
 
 class TextFieldDelegate : NSObject, NSTextFieldDelegate {
-    override func controlTextDidEndEditing(obj: NSNotification) {
+    override func controlTextDidEndEditing(_ obj: Notification) {
 
-        let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefault: UserDefaults = UserDefaults.standard
         if let textField: NSTextField = obj.object as? NSTextField {
-            println("text change \(textField.identifier)")
+            print("text change \(textField.identifier)")
             if textField.identifier == "filename" {
                 userDefault.setValue(textField.stringValue, forKey: "filename")
             } else if textField.identifier == "fileExtension" {
@@ -32,7 +32,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var openInEditorChk: NSButton!
     @IBOutlet weak var editorRadio: NSMatrix!
     
-    let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefault: UserDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,29 +41,29 @@ class ViewController: NSViewController {
         displayValueFromUserDefault()
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
     }
 
     func displayValueFromUserDefault() {
-        if let filename: String = userDefault.valueForKey("filename") as? String {
+        if let filename: String = userDefault.value(forKey: "filename") as? String {
             fileNameTxt.stringValue = filename
         } else {
             userDefault.setValue(Constants.FILENAME, forKey: "filename")
             fileNameTxt.stringValue = Constants.FILENAME
         }
         
-        if let filenameExtension: String = userDefault.valueForKey("filenameExtension") as? String {
+        if let filenameExtension: String = userDefault.value(forKey: "filenameExtension") as? String {
             fileExtensionTxt.stringValue = filenameExtension
         } else {
             userDefault.setValue(Constants.FILE_EXTENSION, forKey: "filenameExtension")
             fileExtensionTxt.stringValue = Constants.FILE_EXTENSION
         }
         
-        if let appendSequence: String = userDefault.valueForKey("appendSequence") as? String {
-            if appendSequence.lowercaseString == "true" {
+        if let appendSequence: String = userDefault.value(forKey: "appendSequence") as? String {
+            if appendSequence.lowercased() == "true" {
                 appendSeqChk.state = NSOnState
             } else {
                 appendSeqChk.state = NSOffState
@@ -73,8 +73,8 @@ class ViewController: NSViewController {
             appendSeqChk.state = NSOnState
         }
         
-        if let openInEditor: String = userDefault.valueForKey("openInEditor") as? String {
-            if openInEditor.lowercaseString == "true" {
+        if let openInEditor: String = userDefault.value(forKey: "openInEditor") as? String {
+            if openInEditor.lowercased() == "true" {
                 openInEditorChk.state = NSOnState
             } else {
                 openInEditorChk.state = NSOffState
@@ -84,25 +84,25 @@ class ViewController: NSViewController {
             openInEditorChk.state = NSOnState
         }
         
-        if let editor: String = userDefault.valueForKey("editor") as? String {
-            switch editor.lowercaseString {
+        if let editor: String = userDefault.value(forKey: "editor") as? String {
+            switch editor.lowercased() {
             case "textmate":
-                editorRadio.selectCellAtRow(2, column: 0)
+                editorRadio.selectCell(atRow: 2, column: 0)
             case "textwrangler":
-                editorRadio.selectCellAtRow(1, column: 0)
+                editorRadio.selectCell(atRow: 1, column: 0)
             default:
-                editorRadio.selectCellAtRow(0, column: 0)
+                editorRadio.selectCell(atRow: 0, column: 0)
             }
         } else {
             userDefault.setValue(Constants.EDITOR, forKey: "editor")
-            editorRadio.selectCellAtRow(0, column: 0)
+            editorRadio.selectCell(atRow: 0, column: 0)
         }
 
     }
 
 
-    @IBAction func editorPress(sender: NSMatrix) {
-        println("editorPress")
+    @IBAction func editorPress(_ sender: NSMatrix) {
+        print("editorPress")
         switch editorRadio.selectedRow {
         case 2:
             userDefault.setValue("textmate", forKey: "editor")
@@ -112,24 +112,24 @@ class ViewController: NSViewController {
             userDefault.setValue("textedit", forKey: "editor")
         }
     }
-    @IBAction func openInEditorPress(sender: NSButton) {
-        println("openInEditorPress")
+    @IBAction func openInEditorPress(_ sender: NSButton) {
+        print("openInEditorPress")
         if sender.state == NSOnState {
             userDefault.setValue("true", forKey: "openInEditor")
         } else {
             userDefault.setValue("false", forKey: "openInEditor")
         }
     }
-    @IBAction func appendSequencePress(sender: NSButton) {
-        println("appendSequencePress")
+    @IBAction func appendSequencePress(_ sender: NSButton) {
+        print("appendSequencePress")
         if sender.state == NSOnState {
             userDefault.setValue("true", forKey: "appendSequence")
         } else {
             userDefault.setValue("false", forKey: "appendSequence")
         }
     }
-    @IBAction func restoreDefault(sender: AnyObject) {
-        println("default press")
+    @IBAction func restoreDefault(_ sender: AnyObject) {
+        print("default press")
         userDefault.setValue(Constants.FILENAME, forKey: "filename")
         userDefault.setValue(Constants.FILE_EXTENSION, forKey: "filenameExtension")
         userDefault.setValue(Constants.APPEND_SEQUENCE, forKey: "appendSequence")

@@ -18,10 +18,10 @@
     
     FinderApplication* finder = [SBApplication applicationWithBundleIdentifier:@"com.apple.Finder"];
     
-    FinderItem *target = [(NSArray*)[[finder selection]get] firstObject];
-    if (target == nil){
-        target = [[[[finder FinderWindows] firstObject] target] get];
-    }
+//    FinderItem *target = [(NSArray*)[[finder selection]get] firstObject];
+//    if (target == nil){
+    FinderItem *target = [[[[finder FinderWindows] firstObject] target] get];
+//    }
     
     NSURL* url =[NSURL URLWithString:target.URL];
     NSError* error;
