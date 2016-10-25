@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
         print("applicationWillFinishLaunching")
-        var foundSetting: Bool = true
+        var foundSetting: Bool = false
         if NSEvent.modifierFlags() == NSEventModifierFlags.option {
             foundSetting = true
         }

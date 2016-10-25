@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B82170651A1E41B300DD4278 /* FinderPath.m in Sources */ = {isa = PBXBuildFile; fileRef = B82170631A1E41B300DD4278 /* FinderPath.m */; };
-		B82170671A1E41D600DD4278 /* Finder.app in Resources */ = {isa = PBXBuildFile; fileRef = B82170661A1E41D600DD4278 /* Finder.app */; };
-		B82170681A1E421500DD4278 /* Finder.app in Sources */ = {isa = PBXBuildFile; fileRef = B82170661A1E41D600DD4278 /* Finder.app */; };
 		B821706D1A1E4F6F00DD4278 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B821706C1A1E4F6F00DD4278 /* Constants.swift */; };
 		B897B6EF1A1E15220029A370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B897B6EE1A1E15220029A370 /* AppDelegate.swift */; };
 		B897B6F11A1E15220029A370 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B897B6F01A1E15220029A370 /* ViewController.swift */; };
@@ -47,8 +45,8 @@
 		B82170621A1E41B200DD4278 /* QuickFile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickFile-Bridging-Header.h"; sourceTree = "<group>"; };
 		B82170631A1E41B300DD4278 /* FinderPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinderPath.m; sourceTree = "<group>"; };
 		B82170641A1E41B300DD4278 /* FinderPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinderPath.h; sourceTree = "<group>"; };
-		B82170661A1E41D600DD4278 /* Finder.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Finder.app; path = /System/Library/CoreServices/Finder.app; sourceTree = "<absolute>"; };
 		B821706C1A1E4F6F00DD4278 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B874D0B11DBF1049002792E8 /* Finder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Finder.h; sourceTree = "<group>"; };
 		B897B6E91A1E15220029A370 /* QuickFile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickFile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B897B6ED1A1E15220029A370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B897B6EE1A1E15220029A370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				B8F972481A1EE68D0028D291 /* QuickFile.icns */,
-				B82170661A1E41D600DD4278 /* Finder.app */,
 				B897B6EB1A1E15220029A370 /* QuickFile */,
 				B897B6FE1A1E15220029A370 /* QuickFileTests */,
 				B897B6EA1A1E15220029A370 /* Products */,
@@ -102,6 +99,7 @@
 		B897B6EB1A1E15220029A370 /* QuickFile */ = {
 			isa = PBXGroup;
 			children = (
+				B874D0B11DBF1049002792E8 /* Finder.h */,
 				B82170631A1E41B300DD4278 /* FinderPath.m */,
 				B82170641A1E41B300DD4278 /* FinderPath.h */,
 				B897B6EE1A1E15220029A370 /* AppDelegate.swift */,
@@ -185,7 +183,7 @@
 		B897B6E11A1E15220029A370 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Weerawit Maneepongsawat";
 				TargetAttributes = {
 					B897B6E81A1E15220029A370 = {
@@ -228,7 +226,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B82170671A1E41D600DD4278 /* Finder.app in Resources */,
 				B897B6F31A1E15220029A370 /* Images.xcassets in Resources */,
 				B897B6F61A1E15220029A370 /* Main.storyboard in Resources */,
 				B8F972491A1EE68D0028D291 /* QuickFile.icns in Resources */,
@@ -249,7 +246,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B82170681A1E421500DD4278 /* Finder.app in Sources */,
 				B82170651A1E41B300DD4278 /* FinderPath.m in Sources */,
 				B897B6F11A1E15220029A370 /* ViewController.swift in Sources */,
 				B897B6EF1A1E15220029A370 /* AppDelegate.swift in Sources */,
@@ -300,15 +296,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -342,8 +342,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -352,6 +354,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -361,6 +364,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -373,6 +377,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.weerawit.maneepongsawat.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "QuickFile/QuickFile-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -389,6 +394,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuickFile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.weerawit.maneepongsawat.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "QuickFile/QuickFile-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -410,6 +416,7 @@
 				);
 				INFOPLIST_FILE = QuickFileTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.weerawit.finder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickFile.app/Contents/MacOS/QuickFile";
@@ -427,6 +434,7 @@
 				);
 				INFOPLIST_FILE = QuickFileTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.weerawit.finder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickFile.app/Contents/MacOS/QuickFile";
