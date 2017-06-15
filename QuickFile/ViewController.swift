@@ -10,15 +10,18 @@ import Foundation
 import AppKit
 
 class TextFieldDelegate : NSObject, NSTextFieldDelegate {
+    
     override func controlTextDidEndEditing(_ obj: Notification) {
 
         let userDefault: UserDefaults = UserDefaults.standard
         if let textField: NSTextField = obj.object as? NSTextField {
-            print("text change \(textField.identifier)")
+            print("text change \(String(describing: textField.identifier))")
             if textField.identifier == "filename" {
                 userDefault.setValue(textField.stringValue, forKey: "filename")
             } else if textField.identifier == "fileExtension" {
                 userDefault.setValue(textField.stringValue, forKey: "filenameExtension")
+            } else if textField.identifier == "editorOther" {
+                userDefault.setValue(textField.stringValue, forKey: "editor")
             }
         }
     }
@@ -31,6 +34,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var appendSeqChk: NSButton!
     @IBOutlet weak var openInEditorChk: NSButton!
     @IBOutlet weak var editorRadio: NSMatrix!
+    @IBOutlet weak var editorOther: NSTextField!
     
     let userDefault: UserDefaults = UserDefaults.standard
     
@@ -87,11 +91,18 @@ class ViewController: NSViewController {
         if let editor: String = userDefault.value(forKey: "editor") as? String {
             switch editor.lowercased() {
             case "textmate":
+                editorOther.isEnabled = false
                 editorRadio.selectCell(atRow: 2, column: 0)
             case "textwrangler":
+                editorOther.isEnabled = false
                 editorRadio.selectCell(atRow: 1, column: 0)
-            default:
+            case "textedit":
+                editorOther.isEnabled = false
                 editorRadio.selectCell(atRow: 0, column: 0)
+            default:
+                editorRadio.selectCell(atRow: 3, column: 0)
+                editorOther.isEnabled = true
+                editorOther.stringValue = editor
             }
         } else {
             userDefault.setValue(Constants.EDITOR, forKey: "editor")
@@ -99,16 +110,21 @@ class ViewController: NSViewController {
         }
 
     }
-
+    
 
     @IBAction func editorPress(_ sender: NSMatrix) {
         print("editorPress")
         switch editorRadio.selectedRow {
         case 2:
+            editorOther.isEnabled = false
             userDefault.setValue("textmate", forKey: "editor")
         case 1:
+            editorOther.isEnabled = false
             userDefault.setValue("textwrangler", forKey: "editor")
+        case 3:
+            editorOther.isEnabled = true
         default:
+            editorOther.isEnabled = false
             userDefault.setValue("textedit", forKey: "editor")
         }
     }

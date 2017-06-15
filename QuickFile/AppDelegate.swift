@@ -82,7 +82,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         workspace.openFile(newFilename, withApplication: "TextEdit")
                     }
                 default:
-                    NSWorkspace.shared().openFile(newFilename, withApplication: "TextEdit")
+                    if !NSWorkspace.shared().openFile(newFilename, withApplication: defaultEditor) {
+                        workspace.openFile(newFilename, withApplication: "TextEdit")
+                    }
                 }
                 
                 //log.writeToFile("/tmp/quick.log", atomically: true, encoding: String.Encoding.utf8)
@@ -177,7 +179,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         workspace.openFile(newFilename, withApplication: "TextEdit")
                     }
                 default:
-                    NSWorkspace.shared().openFile(newFilename, withApplication: "TextEdit")
+                    if !NSWorkspace.shared().openFile(newFilename, withApplication: defaultEditor) {
+                        workspace.openFile(newFilename, withApplication: "TextEdit")
+                    }
                 }
                 
             }
